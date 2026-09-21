@@ -28,13 +28,9 @@ Merely participating in the project is not enough for 5A. The contribution must 
 
 ## Artifacts
 
-- the team's assessment of the student's ability to complete assigned tasks on time and an assessment of soft skills;
-- a presentation covering the problem, solution process, and results; and
-- a complete report on the work performed.
-
-## Organizational feature
-
-Collaborative projects are conducted with ITMO teams. This distinguishes them from external industrial projects independently arranged by students.
+- an assessment by the team in which the student worked of their ability to complete tasks on time and their soft skills; the review is completed by the project team lead or NIR supervisor;
+- a collaborative-project description in Russian or English as a technology article, complete technical report, popular-science article, or repository documentation; and
+- a presentation describing the problem statement, solution process, and main results.
 
 ## Common reasons for a lower grade
 

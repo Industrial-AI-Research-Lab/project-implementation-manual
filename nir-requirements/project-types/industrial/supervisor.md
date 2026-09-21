@@ -14,8 +14,6 @@ Define:
 - deployment constraints; and
 - an industry representative who can provide a substantive review.
 
-The industrial topic is formulated by an industry representative acting as the customer.
-
 ## Metrics
 
 Depending on the task, suitable measures extend beyond ML metrics and may include:

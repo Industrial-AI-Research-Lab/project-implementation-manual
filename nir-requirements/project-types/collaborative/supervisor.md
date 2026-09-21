@@ -35,7 +35,3 @@ The project requires an independent and significant contribution, regular and ef
 - delays are systematic;
 - the team effectively replaces the student in completing their part; or
 - the student does not understand the overall system.
-
-## Organizational distinction
-
-A collaborative project is tied to work with ITMO teams. Unlike a group project, the scale of the overall project does not have to equal the sum of N individual projects; the primary concern is the specific student's individual contribution to the team.

@@ -29,19 +29,11 @@ Saying that a solution “could be used by a company” is not enough. The proje
 
 ## Artifacts
 
-The extended criteria require the following:
+The following are mandatory:
 
-- a high-quality review from an industry representative;
-- a technical artifact;
-- a project description;
-- a presentation; and
-- quantitative results.
-
-A complete report on the work performed is also required.
-
-## Organizational feature
-
-The industrial project topic must be formulated by an industry representative acting as the customer. A student may independently reach an agreement with an external organization and propose the topic to the academic program director.
+- a review from an industry representative assessing the quality of the solution and the potential use of its results;
+- an industrial-project description in Russian or English as a technology article, complete technical report, or popular-science article; and
+- a presentation describing the problem statement, solution process, and main results.
 
 ## Formal cap
 

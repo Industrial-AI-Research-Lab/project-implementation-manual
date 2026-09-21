@@ -32,9 +32,8 @@ A working system alone does not warrant 5A. You must show how the solution is be
 ## Artifacts
 
 - a public code repository;
-- a free-form description of the technological solution, such as a preprint or technology article in Russian or English;
-- a presentation; and
-- a short report on the completed work.
+- a description of the technological solution as a technology article or complete technical report; and
+- a presentation describing the problem statement, solution process, and main results.
 
 ## Common reasons for a lower grade
 

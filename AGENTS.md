@@ -12,7 +12,7 @@ The current iteration contains only NIR project descriptions, requirements, asse
 - `README.ru.md` — Russian repository entry point.
 - `nir-requirements/general/` — requirements shared by all project types.
 - `nir-requirements/assessment/` — grading principles, rubrics, matrices, and defense checklists.
-- `nir-requirements/project-types/` — student and supervisor guidance for scientific, technological, industrial, collaborative, and group projects.
+- `nir-requirements/project-types/` — student and supervisor guidance for scientific, technological, industrial, and collaborative projects.
 - `nir-requirements/llm-assistant/` — reusable context for an LLM assisting with NIR projects.
 - Future materials may add top-level sections for recommendations, templates, and methodological manuals. Do not create empty placeholder sections unless the user requests them.
 
@@ -45,11 +45,13 @@ The current iteration contains only NIR project descriptions, requirements, asse
 
 ## Content and Terminology SOP
 
+- Treat the two Google Docs linked from `nir-requirements/README.md` and `nir-requirements/README.ru.md` as the primary sources of truth for student-facing and committee-facing requirements. When repository content conflicts with either source, update both Markdown language editions to match the relevant source.
+- Keep local DOCX copies of the primary sources untracked. Publish links to the Google Docs, not copied DOCX files.
 - Preserve substantive academic and organizational information during editing or migration.
 - Do not present these materials as formally approved, binding, or current official policy.
 - Use `LLM` or `LLM assistant` for product-neutral assistant guidance. Do not introduce a vendor-specific assistant name unless the user explicitly requests product-specific instructions.
 - Do not restore attribution to the removed dated source. State retained requirements directly and neutrally.
-- Keep the established project-type terms consistent across the repository: scientific, technological, industrial, collaborative, and group project.
+- Keep the established project-type terms consistent across the repository: scientific, technological, industrial, and collaborative project.
 
 ## Git and Change-Control SOP
 

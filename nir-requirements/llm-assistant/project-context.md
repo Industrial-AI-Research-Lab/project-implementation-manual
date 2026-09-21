@@ -118,7 +118,6 @@ The final grade is not an arithmetic mean. It is the highest level for which all
 - the presentation does not communicate the problem statement, method, and results → no higher than 4C;
 - the student cannot answer basic questions → no higher than 3D;
 - an industrial project lacks the mandatory partner review → no higher than 4B; and
-- a group project has insufficient combined scale or indistinguishable individual contributions → no higher than 4C.
 
 ## Repository requirements
 
@@ -151,31 +150,25 @@ The student must independently explain the method, architecture, metrics, baseli
 
 Focus: scientific novelty, a research question or hypothesis, methodology, strong baselines or state-of-the-art methods, complete experiments, ablation, statistical or methodological soundness, publication readiness, and reproducibility.
 
-Target artifacts: a public repository, scientific-paper preprint, presentation, and short extended abstract or report.
+Target artifacts: a public repository, scientific-paper preprint, and presentation.
 
 ### Technological
 
 Focus: technical novelty, architecture, engineering quality, testing, reproducibility, benchmarking against existing solutions, and practical value.
 
-Target artifacts: a public repository, technology report, article or solution description, presentation, and short report.
+Target artifacts: a public repository, technology article or complete technical report, and presentation.
 
 ### Industrial
 
 Focus: a real or realistic problem of a specific user or organization, the existing process as a baseline, quantitative impact, deployment potential, and confirmation from an industrial customer.
 
-The topic is formulated by an industry representative acting as the customer. A substantive industry review is mandatory.
+A substantive review from an industry representative is mandatory.
 
 ### Collaborative
 
 Focus: the student's independent contribution to the shared team result, meeting deadlines, communication, integration, and understanding of the overall system.
 
-The project is conducted with ITMO teams. Evidence of the team contribution and soft skills is required.
-
-### Group
-
-An additional format available only upon a supervisor's application and only to first-year students. Students must not independently form such a group, and the type is not advertised to students before supervisor applications are available.
-
-For N participants, the scale must equal N individual projects. Each participant has an independent and substantively significant area of responsibility, and the components are integrated into one result. Do not divide one small task formally; separate subtopics are not required.
+Evidence of the team contribution and soft skills is required.
 
 ## How the assistant should select a project type
 
@@ -183,7 +176,6 @@ For N participants, the scale must equal N individual projects. Each participant
 - if the central result is a new or substantially improved technical solution and an engineering benchmark → technological;
 - if success is defined by impact on a real process and an industrial customer is involved → industrial;
 - if the student joins an existing team and their individual contribution is evaluated → collaborative; and
-- if several students jointly solve one large task with the scale of N individual projects → group, subject to the special conditions.
 
 If the user has not specified a type, first determine it from the nature of the expected result. If ambiguous, propose the one or two most suitable options and explain the distinction.
 

@@ -1,42 +1,5 @@
 # NIR Project Requirements and Assessment Framework
 
-## Additional format: group project
-
-A group project is an additional format available only upon application by a NIR supervisor.
-
-Students may not independently form a group to carry out this type of project. It is available only to first-year students.
-
-### What is assessed?
-
-- the scale and depth of the task;
-- whether project volume matches the number of participants: its volume and complexity must equal the combined work the participants could have completed individually;
-- scientific and/or technological novelty;
-- technical standard and implementation quality;
-- integrity of the result and consistency of decisions made by different participants;
-- readiness for practical use and/or further development; and
-- participants' ability to work as a team and meet deadlines.
-
-### Required results
-
-- a public implementation repository containing every participant's work; all participants must be contributors, and authorship of code sections must be assessable;
-- a presentation describing the shared problem, solution architecture, allocation of work, implementation process, and main results;
-- an individual report from every participant describing their part, its results, and their personal contribution;
-- a description of task allocation and relationships among project components;
-- a demonstration of the working result where a software or technological product applies;
-- an assessment of every participant's contribution by the supervisor and/or team members;
-- evidence that each participant's actual work matches their stated role and demonstrates sufficient complexity and independence; and
-- where necessary, evidence from commit history, an issue or task tracker, experiments, documentation, and other artifacts.
-
-### Specific features
-
-A group project addresses one complex task whose volume and complexity are comparable to the combined expected work of all participants' individual projects. A project with N participants must therefore contain work equivalent to N individual projects. Every participant must have an independent, substantively significant part whose results can be identified and assessed separately.
-
-Mechanically dividing one task into several small pieces is not sufficient. Each contribution must include independent work requiring the program's professional competencies, and the participants' results must be integrated into one final project outcome.
-
-The supervisor does not need to divide the project into formal subtopics.
-
-Students should not be informed about this project type until supervisors submit applications.
-
 # Extended Assessment Criteria for Master's NIR Projects
 
 ## 1. General assessment principles
@@ -62,7 +25,7 @@ The grade depends not only on the amount of work completed, but on all of the fo
 8. presentation and talk quality;
 9. the student's ability to explain decisions and results;
 10. alignment between the result and the declared project type; and
-11. for group and collaborative projects, teamwork quality and individual contribution.
+11. for collaborative projects, teamwork quality and individual contribution.
 
 ## Mandatory conditions for a 5A grade
 
@@ -77,7 +40,6 @@ The project must include every artifact required for its type:
 - a presentation;
 - an industry-partner review for an industrial project;
 - a team-contribution assessment for a collaborative project; and
-- an individual contribution report for a group project.
 
 A missing mandatory artifact automatically limits the maximum grade below 5A. A link alone does not constitute a quality artifact: its content must satisfy the project requirements.
 
@@ -267,36 +229,6 @@ Participation is formal and the contribution minimal. Only small supporting task
 
 The student did not complete their part or the contribution cannot be verified. Tasks may be incomplete, the result not integrated, the student unable to explain it, substantial work completed by others, deadlines systematically missed, or communication absent.
 
-## Group project
-
-A group project differs from a collaborative project because its single shared project must have a scale equal to the combined work of all participants. For N people, volume and complexity must match N individual projects. Assessment covers the shared result, scale, complexity, individual contributions, and integration.
-
-### 5A — outstanding group result
-
-The group creates a complex integrated result whose scale matches the combined work of its participants. The task is relevant; scale matches team size; everyone owns an independent, substantive area; every contribution is identifiable; components form one result; relevant alternatives are compared quantitatively; metrics and component analysis are appropriate; the result is reproducible; repository and documentation are strong; all artifacts and individual reports are present; the presentation shows both the shared result and individual contributions; every participant explains their part and its relationships; and teamwork is effective.
-
-A one-person project artificially divided among several students cannot receive 5A.
-
-### 4B — strong group result
-
-A complete complex project exists. Scale largely meets team requirements, work is allocated, components are integrated, measurable results and comparisons exist, repository and documentation are strong, and most individual contributions are substantive. Benchmarking, individual components, experiments, integration, or balance of contributions may have isolated weaknesses.
-
-### 4C — good group result
-
-The project has sufficient scale and is genuinely collaborative. Several independent components and a working shared result exist; contributions can be identified; and basic quantitative results and some comparisons are present. Some parts may be underdeveloped, integration or experiments incomplete, documentation weak, or individual contributions insufficiently substantive.
-
-### 3D — minimally sufficient group result
-
-Different participants completed several parts and a shared prototype exists, but scale or quality is insufficient. The volume may be too small for the number of participants, some people may do only supporting work, components may be poorly integrated, experiments and comparisons weak, or repository quality inadequate.
-
-### 3E — borderline group result
-
-The project is formally group-based but does not meet the required scale. Several participants may work on one small task, most work may be done by one or two people, contributions may be hard to distinguish, the final result small, integration superficial, and quantitative evaluation weak.
-
-### 2FX — unsatisfactory group project
-
-There is no unified working result; volume is far below the combined expected work; individual contributions cannot be identified; much of the stated work is absent; components are not integrated; artifacts or evidence of operation are missing; participants cannot explain their contributions; or the project is one small individual task merely declared a group project.
-
 # Artifact Criteria
 
 ## Code and repository quality
@@ -393,8 +325,6 @@ For complex systems:
 | No working or verifiable result | no higher than 3E; 2FX if no substantive result exists |
 | The repository cannot verify the claimed result | no higher than 4C |
 | An industrial project lacks the mandatory partner evaluation or review | no higher than 4B |
-| A group project's volume is substantially below the participants' combined expected work | no higher than 4C |
-| Individual contributions cannot be identified in a group project | no higher than 4C |
 | The presentation does not communicate the problem, method, and results | no higher than 4C |
 | The student cannot answer basic questions about their work | no higher than 3D |
 
@@ -410,7 +340,7 @@ A 5A is awarded only when relevance, quality, novelty or practical value, experi
 
 ## 1. General assessment matrix
 
-This matrix applies to scientific, technological, industrial, collaborative, and group projects.
+This matrix applies to scientific, technological, industrial, and collaborative projects.
 
 | Criterion | 5A | 4B | 4C | 3D | 3E | 2FX |
 |---|---|---|---|---|---|---|
@@ -465,16 +395,6 @@ The general matrix is supplemented by one specialized block.
 | **Teamwork** | Highly effective and helps the team solve problems. | Effective. | Generally effective with isolated issues. | Needs team help. | Communication is difficult. | Does not fulfill team responsibilities. |
 | **Deadlines** | All tasks are timely and the student supports the shared schedule. | Almost all met. | Isolated delays. | Regular delays. | Major delays. | Systematic non-completion. |
 | **Integration** | High-quality, documented integration. | Good integration. | Integrated with some issues. | Partial. | Poor. | Not integrated. |
-
-### 2.5. Group project
-
-| Criterion | 5A | 4B | 4C | 3D | 3E | 2FX |
-|---|---|---|---|---|---|---|
-| **Scale** | Volume and complexity equal N full individual projects for N participants. | Meets most scale requirements. | Sufficient, but some participants are underloaded. | Noticeably too small. | Group-based only formally. | One small individual project in practice. |
-| **Task allocation** | Everyone owns an independent challenging area. | Good with minor imbalance. | Allocated, but some tasks are too simple. | Formal allocation. | Most work is done by one or two people. | Roles are undefined. |
-| **Integration** | All components form one complete result. | Good with isolated gaps. | Main components integrated. | Partial. | Weakly connected. | No unified result. |
-| **Individual contribution** | Every participant has a measurable, substantive contribution. | Most are significant. | Identifiable but unequal. | Some are minimal. | Hard to separate. | Cannot be verified. |
-| **Team result** | High-quality integration makes the whole substantially exceed separate components. | Strong unified result. | Working shared result. | Exists with weak integration. | Formal. | No shared result. |
 
 # Using the Matrix at the Defense
 

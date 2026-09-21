@@ -37,8 +37,7 @@ Expected artifacts include:
 
 - a public repository containing the scientific solution and experiment code;
 - a scientific-paper preprint using the template of the selected journal or conference to which the work is expected to be submitted within three months after the project ends;
-- a presentation; and
-- a short extended-abstract report.
+- a presentation describing the problem statement, solution process, and main results.
 
 ## Common reasons for a lower grade
 

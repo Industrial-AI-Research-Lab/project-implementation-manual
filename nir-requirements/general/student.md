@@ -76,7 +76,7 @@ At the defense, the student should explain decisions and answer questions indepe
 
 ## Artifacts
 
-The exact set depends on the project type. A presentation is almost always the minimum. Scientific and technological projects also require a substantive written artifact and usually a public repository; an industrial project requires a review by an industry representative; a collaborative project requires an assessment of the team contribution; and a group project requires individual participant reports and evidence of their contributions.
+The exact set depends on the project type. A presentation is almost always the minimum. Scientific and technological projects also require a substantive written artifact and a public repository; an industrial project requires a review by an industry representative; and a collaborative project requires an assessment of the team contribution.
 
 A formal link alone does not satisfy an artifact requirement. The artifact's content must make the claimed result verifiable.
 
@@ -85,6 +85,12 @@ A formal link alone does not satisfy an artifact requirement. The artifact's con
 A project is treated as a complete semester-long work. The student builds a portfolio of several completed projects and may continue the topic with the same supervisor. At the end of the project, the student presents a presentation and the additional artifacts required for that project type.
 
 The defense may also consider achievements beyond the mandatory results, including publications, patents, deployment certificates, high-quality technology articles, and the popularity of open-source software.
+
+## Project enrollment for Fall 2026
+
+Current topics are published in the [project spreadsheet](https://docs.google.com/spreadsheets/d/1UqV5nvDh9ne449W-BcJ5T5bVY6vFEF4yl8qbIWs2Nxs/edit?gid=1635037963#gid=1635037963).
+
+To apply for a topic, students must contact the supervisor or contact person directly. The message must include the student's full name and CV; any additional conditions are stated in the individual project description.
 
 ## Use of generative AI
 
