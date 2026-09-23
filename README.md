@@ -9,6 +9,6 @@ This repository collects requirements, recommendations, templates, and methodolo
 
 ## Current materials
 
-- [NIR requirements](nir-requirements/README.md) — shared requirements, assessment guidance, project-type guidance, and context for an LLM assistant.
+- [NIR requirements](nir-requirements/README.md) — shared requirements, assessment guidance, project-type guidance, practical recommendations, and context for an LLM assistant.
 
 Additional recommendations, templates, and methodological manuals may be added in later iterations.
