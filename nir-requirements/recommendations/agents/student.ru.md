@@ -26,7 +26,7 @@
 
 | Агент | Файлы инструкций |
 |---|---|
-| Claude Code | CLAUDE.md, `.claude/rules/`, `.claude/skills/`; AGENTS.md — если CLAUDE.md нет, иначе через импорт `@AGENTS.md` |
+| Claude Code | CLAUDE.md, `.claude/rules/`, `.claude/skills/`; AGENTS.md — если нет ни CLAUDE.md, ни CLAUDE.local.md, иначе через импорт `@AGENTS.md` |
 | Codex | AGENTS.md |
 | Cursor | AGENTS.md, `.cursor/rules/` |
 | GitHub Copilot | AGENTS.md, CLAUDE.md, `.github/copilot-instructions.md` |
@@ -50,6 +50,8 @@
 CLAUDE.local.md
 .claude/settings.local.json
 ```
+
+Личный CLAUDE.local.md сам по себе отключает чтение AGENTS.md в Claude Code. Если в проекте нет CLAUDE.md, добавьте в CLAUDE.local.md строку `@AGENTS.md`.
 
 Перед коммитом проверьте, что в общих файлах нет токенов и абсолютных путей к вашей машине. Ключи поймает gitleaks из pre-commit, пути ищите сами.
 
@@ -77,6 +79,12 @@ CLAUDE.local.md
 ```
 
 Хук Stop запускает проверку перед тем, как агент закончит ответ. Если проверка упала, код выхода 2 не даёт агенту остановиться, а вывод проверки он получает как причину продолжить и исправляет то, что сломал. Если исправить не получается, агент будет пробовать снова; прервите его и разберитесь сами.
+
+Полный `make check` после каждого ответа становится медленным, когда тесты идут минутами. Есть два более дешёвых варианта: оставить в хуке Stop только быстрые цели (форматирование, линтер), а тесты доверить pre-commit и CI; или прогонять линтер по отредактированному файлу из хука `PostToolUse` с matcher `Edit|Write`, а полную проверку оставить на Stop. В любом случае пропускайте проверку, когда рабочее дерево чистое:
+
+```json
+{ "type": "command", "command": "[ -z \"$(git status --porcelain)\" ] || make check >&2 || exit 2" }
+```
 
 **Pre-commit**, `.pre-commit-config.yaml`:
 
@@ -131,6 +139,7 @@ git commit -m "chore: connect agent overlay v0.3.0"
 ```
 
 - Общие указания из overlay подключите в CLAUDE.md строкой `@.agents/overlay/AGENTS.md`.
+- Ссылка коммитится как символическая. Клон на Windows получит её только при `core.symlinks=true` и праве создавать символические ссылки (режим разработчика); иначе на её месте окажется текстовый файл с путём. Если кто-то в проекте работает на Windows, обойдитесь без ссылки и подключите правила в CLAUDE.md пофайлово: `@.agents/overlay/rules/<имя>.md`.
 - Клонируйте проект с флагом `--recurse-submodules`, иначе папка overlay окажется пустой. Напишите об этом в README: руководитель клонирует проект так же.
 - Новую версию overlay подключайте через PR: переключите submodule на новый тег и закоммитьте это в ветке `chore/...`. Так в истории видно, когда поменялись правила агента.
 

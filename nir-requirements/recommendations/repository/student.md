@@ -7,7 +7,7 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Term | Meaning | What it means for you |
 |---|---|---|
 | Pull request (PR), Draft, Ready for review | A PR proposes a change from a branch into `main`, with a description and a review thread. Draft marks it unfinished; Ready for review requests the reviewer. | A draft cannot be merged and requests no review. Remove Draft only when the work is done. |
-| CODEOWNERS | The file `.github/CODEOWNERS` maps paths to reviewers; GitHub requests them when a PR becomes Ready for review. | One line `* @<supervisor>` makes the supervisor the reviewer of every PR. It works only after the file is merged into `main`. |
+| CODEOWNERS | The file `.github/CODEOWNERS` maps paths to reviewers; GitHub requests them when a PR becomes Ready for review. | One line `* @<supervisor>` makes the supervisor the reviewer of every PR. It works only after the file is merged into `main`, and on the Free plan only in a public repository. |
 | Ruleset, branch protection | Repository settings that block direct pushes to `main` and require a PR, an approval, resolved threads, or green checks. | Free on a public repository; on a private one only on a paid plan. Without it the rules hold by agreement. |
 | ADR, decision log, statuses | An architecture decision record is one file per decision: context, options, decision, consequences. The folder is the decision log. Statuses: proposed, accepted, rejected, superseded. | An accepted record is never edited; a change is a new record that supersedes the old one. |
 | Tracking server, backend store, artifact store | MLflow parts: the server receives runs; the backend store keeps params, metrics and tags in a database; the artifact store keeps files, models, plots and configs, for example in an S3-compatible storage such as MinIO. | Locally the file `mlflow.db` is the backend store and artifacts land in a folder; a shared server of the lab has all three set up. |
@@ -27,9 +27,9 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Enforced by the platform | Public, Free | Private, Free |
 |---|---|---|
 | Rulesets: PR required, approval, resolved threads, green checks | yes | no |
-| Review from code owners | yes | no |
+| CODEOWNERS: automatic review requests and the rule that requires their approval | yes | no |
 | Secret scanning and push protection | yes | no |
-| Draft PRs, review requests via CODEOWNERS, Actions minutes | yes | yes, 2 000 minutes a month |
+| Draft PRs, Actions minutes | yes | yes, 2 000 minutes a month |
 
 - On a private repository the same rules hold by agreement; CI is the only automatic gate there.
 - Keep a full local clone and a second remote, an institutional GitLab or another forge: access to the platform can be intermittent, and the supervisor runs exactly a fresh clone.
@@ -61,7 +61,7 @@ results/          tables and figures exported from code
 - Branch name: `<type>/<short-description>` in lowercase with hyphens. Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, plus `exp` for an experiment series. The same type opens the PR title: `feat: ...`.
 - One branch per change; it lives days, not weeks. Commit and push at the end of every working session, so the semester's history shows work spread over the weeks.
 - Never rewrite pushed history on `main`. Merge PRs with squash and merge; the PR title then becomes the commit message on `main`.
-- Small fixes may go to `main` directly by agreement with the supervisor; the pre-commit hooks run on them too.
+- Small fixes may go to `main` directly only by agreement with the supervisor and only where no ruleset requires a PR; the pre-commit hooks run on them too.
 - Commit message wording is optional but useful: see [Commit messages](commit-messages.md).
 
 ## Pull request
@@ -74,7 +74,7 @@ PR fields:
 - **Plan**: three to five lines written by hand when you open the PR, what you intend to do;
 - **Done**: before removing Draft, have an LLM assistant generate a concise description of the work from the diff; the Plan and the `Closes #N` line stay untouched;
 - **How to reproduce**: what the reviewer runs to see the result: the command with its config, where the data comes from, the MLflow run with the numbers;
-- assignee: you; reviewer: the supervisor, requested by CODEOWNERS when Draft is removed;
+- assignee: you; reviewer: the supervisor; in a public repository CODEOWNERS requests them when Draft is removed, in a private one you request them yourself;
 - label `enhancement` for new functionality;
 - Draft until the work is ready. A draft cannot be merged and requests no review.
 

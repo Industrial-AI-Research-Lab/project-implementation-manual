@@ -7,7 +7,7 @@ What you get: a repository you can run from a fresh clone, a review loop that le
 | Term | Meaning | What it means for you |
 |---|---|---|
 | Pull request (PR), Draft, Ready for review | A PR proposes a change from a branch into `main`, with a description and a review thread. Draft marks it unfinished; Ready for review requests the reviewer. | You review PRs that are Ready; a draft is the student's work in progress. |
-| CODEOWNERS | The file `.github/CODEOWNERS` maps paths to reviewers; GitHub requests them when a PR becomes Ready for review. | One line with your handle makes you the reviewer of every PR, once the file is merged into `main`. |
+| CODEOWNERS | The file `.github/CODEOWNERS` maps paths to reviewers; GitHub requests them when a PR becomes Ready for review. | One line with your handle makes you the reviewer of every PR, once the file is merged into `main`; on the Free plan it works only in a public repository. |
 | Ruleset, branch protection | Repository settings that block direct pushes to `main` and require a PR, an approval, resolved threads, or green checks. | Free on a public repository; on a private one the same rules hold only by agreement. |
 | ADR, decision log, statuses | An architecture decision record is one file per decision: context, options, decision, consequences. Statuses: proposed, accepted, rejected, superseded. | You review records in the PR like code; a rejected alternative of yours must appear with the reason. |
 | Experiment, run, tag | MLflow vocabulary: an experiment groups runs; a run is one execution with params, metrics, artifacts and tags, including the commit. | A result without a run id on a PR commit is unverified. |
@@ -15,12 +15,12 @@ What you get: a repository you can run from a fresh clone, a review loop that le
 
 ## First week
 
-Agree the arrangement with the student and have it written into the repository README or the PR template: everything through PRs, or small fixes to `main` allowed; response time; who resolves threads.
+Agree the arrangement with the student and have it written into the repository README or the PR template: everything through PRs, or small fixes to `main` allowed, in which case the ruleset must not require a PR; response time; who resolves threads.
 
 A reminder so that nothing is forgotten; what is needed in each case, you decide:
 
 - accept the invitations: collaborator on the repository, Admin on the student's GitHub Project;
-- ask the student to merge `.github/CODEOWNERS` with your handle and the PR template, and, on a public repository, to set a ruleset on `main`: PR required, one approval, resolved threads, green checks;
+- ask the student to merge the PR template and, on a public repository, `.github/CODEOWNERS` with your handle and a ruleset on `main` that matches the arrangement: PR required, one approval, resolved threads, green checks; in a private repository the student requests your review by hand;
 - accesses: the lab LLM gateway, VPN, the cluster; say whether a shared MLflow server and artifact storage exist and hand over their addresses and credentials, otherwise the student records runs in a local database; the filled `.env.example` in the repository shows what the student has;
 - a test stand, when the project needs one: help to deploy it or point to the lab's;
 - the mandatory MLflow tags and the format of a results row, agreed once.

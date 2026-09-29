@@ -26,7 +26,7 @@ Which files the agents read, as of September 2026:
 
 | Agent | Instruction files |
 |---|---|
-| Claude Code | CLAUDE.md, `.claude/rules/`, `.claude/skills/`; AGENTS.md when there is no CLAUDE.md, otherwise through the `@AGENTS.md` import |
+| Claude Code | CLAUDE.md, `.claude/rules/`, `.claude/skills/`; AGENTS.md when there is neither CLAUDE.md nor CLAUDE.local.md, otherwise through the `@AGENTS.md` import |
 | Codex | AGENTS.md |
 | Cursor | AGENTS.md, `.cursor/rules/` |
 | GitHub Copilot | AGENTS.md, CLAUDE.md, `.github/copilot-instructions.md` |
@@ -50,6 +50,8 @@ Add personal files to `.gitignore`:
 CLAUDE.local.md
 .claude/settings.local.json
 ```
+
+A personal CLAUDE.local.md on its own switches AGENTS.md off for Claude Code. When the project has no CLAUDE.md, put the line `@AGENTS.md` into CLAUDE.local.md.
 
 Before committing, check that the shared files contain no tokens and no absolute paths to your machine. Gitleaks in pre-commit catches keys; look for paths yourself.
 
@@ -77,6 +79,12 @@ The `make check` target from the [repository guide](../repository/student.md#aut
 ```
 
 The Stop hook runs the check before the agent finishes its reply. If the check fails, exit code 2 keeps the agent from stopping, and the agent receives the check output as the reason to continue and fixes what it broke. If it cannot fix it, the agent keeps trying; interrupt it and sort the problem out yourself.
+
+A full `make check` after every reply gets slow once the tests take minutes. Two cheaper layouts: keep only the fast targets, formatting and lint, in the Stop hook and leave the tests to pre-commit and CI; or lint the edited file from a `PostToolUse` hook with the matcher `Edit|Write` and keep the full check for Stop. Either way, skip the check when the working tree is clean:
+
+```json
+{ "type": "command", "command": "[ -z \"$(git status --porcelain)\" ] || make check >&2 || exit 2" }
+```
 
 **Pre-commit**, `.pre-commit-config.yaml`:
 
@@ -131,6 +139,7 @@ git commit -m "chore: connect agent overlay v0.3.0"
 ```
 
 - Import the overlay's shared instructions into CLAUDE.md with the line `@.agents/overlay/AGENTS.md`.
+- The link is committed as a symbolic link. A Windows clone gets it only with `core.symlinks=true` and the right to create symlinks (Developer Mode); otherwise a text file with the path appears in its place. If anyone on the project works on Windows, drop the link and import the rules into CLAUDE.md file by file: `@.agents/overlay/rules/<name>.md`.
 - Clone the project with `--recurse-submodules`, otherwise the overlay folder stays empty. Say so in the README: the supervisor clones the project the same way.
 - Connect a new overlay version through a PR: switch the submodule to the new tag and commit that on a `chore/...` branch. The history then shows when the agent's rules changed.
 

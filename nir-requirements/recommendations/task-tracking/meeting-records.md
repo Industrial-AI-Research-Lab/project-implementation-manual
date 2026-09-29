@@ -33,7 +33,7 @@ Next meeting: YYYY-MM-DD
 
 ## Transcript
 
-Talk's built-in transcript is usually enough. If you do not trust it or recorded the meeting with another tool, pick an option from the table.
+Talk's built-in transcript is usually enough, but it recognises Russian speech only. For a meeting in English, and also if you do not trust the transcript or recorded the meeting with another tool, pick an option from the table.
 
 | Tool | Where it runs | Speakers | What you need |
 |---|---|---|---|
@@ -143,6 +143,7 @@ If you doubt the result, run the check twice and compare the answers: difference
 
 ## Further reading
 
+- [Транскрипция записи встречи](https://support.kontur.ru/talk/80168-transkripciya_zapisi_vstrechi), Kontur.Talk help — when the transcript is produced, Russian speech only, speaker separation.
 - [Получайте готовое резюме встречи](https://kontur.ru/talk/spravka/55135-poluchajte_gotovoe_rezyume_vstrechi), Kontur.Talk help — where to find the summary and what it contains.
 - [faster-whisper](https://github.com/SYSTRAN/faster-whisper) — installation, int8 mode, speed.
 - [WhisperX](https://github.com/m-bain/whisperX) — transcription with speaker labels.
