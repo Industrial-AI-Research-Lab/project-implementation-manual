@@ -11,7 +11,7 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Ruleset, branch protection | Repository settings that block direct pushes to `main` and require a PR, an approval, resolved threads, or green checks. | Free on a public repository; on a private one only on a paid plan. Without it the rules hold by agreement. |
 | ADR, decision log, statuses | An architecture decision record is one file per decision: context, options, decision, consequences. The folder is the decision log. Statuses: proposed, accepted, rejected, superseded. | An accepted record is never edited; a change is a new record that supersedes the old one. |
 | Tracking server, backend store, artifact store | MLflow parts: the server receives runs; the backend store keeps params, metrics and tags in a database; the artifact store keeps files, models, plots and configs, for example in an S3-compatible storage such as MinIO. | Locally the file `mlflow.db` is the backend store and artifacts land in a folder; a shared server of the lab has all three set up. |
-| Experiment, run, param, metric, artifact, tag | MLflow vocabulary: an experiment groups runs; a run is one execution with params (inputs), metrics (numbers over time), artifacts (files) and tags (labels, including the commit). | Every number in your results table points to a run. |
+| Experiment, run, param, metric, artifact, tag | MLflow vocabulary: an experiment groups runs; a run is one execution with params (inputs), metrics (numbers over time), artifacts (files) and tags (labels, including the commit). | Every number in your results table must name the run that produced it. |
 | `.env`, `.env.example`, environment variable | Configuration that differs between machines (paths, endpoints, keys) lives in environment variables. `.env` holds them locally and is ignored; `.env.example` lists the keys with placeholders and is committed. | The supervisor copies `.env.example` to `.env`, fills it in and runs the project. |
 | Repository secret, environment secret | Encrypted values for GitHub Actions. Repository secrets can be created by a collaborator; environment secrets only by the owner. | Credentials that CI needs go there, never into a workflow file or a PR. |
 | pre-commit hook, VCS hook, agent hook | Three mechanisms share the word: pre-commit runs checks before a commit, configured in `.pre-commit-config.yaml`; a bare VCS hook is a script in `.git/hooks`; an agent hook runs a command at a step of an LLM assistant's work. | This guide uses pre-commit and the agent hook; both run the same `make check`. |
@@ -60,7 +60,7 @@ results/          tables and figures exported from code
 
 - Branch name: `<type>/<short-description>` in lowercase with hyphens. Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, plus `exp` for an experiment series. The same type opens the PR title: `feat: ...`.
 - One branch per change; it lives days, not weeks. Commit and push at the end of every working session, so the semester's history shows work spread over the weeks.
-- Never rewrite pushed history on `main`. Merge PRs with squash and merge; the PR title then becomes the commit on `main`.
+- Never rewrite pushed history on `main`. Merge PRs with squash and merge; the PR title then becomes the commit message on `main`.
 - Small fixes may go to `main` directly by agreement with the supervisor; the pre-commit hooks run on them too.
 - Commit message wording is optional but useful: see [Commit messages](commit-messages.md).
 
@@ -112,7 +112,7 @@ consulted: <supervisor>
 
 - The record is written by your LLM assistant, never by hand: at the moment of the decision, ask the assistant to draft it from the discussion, the PR thread and the code, then review it as you review code.
 - What deserves a record: repository structure and data flow; a library, framework or tool such as the tracker, the storage or the LLM gateway; an interface or data contract; the baseline, the primary metric, the dataset and its split; a direction closed by a negative result. A single hyperparameter run is an MLflow run and needs no record.
-- The record is born in the feature branch with status proposed, is reviewed in the PR like code, and becomes accepted in the same PR before merge. A rejected option is merged with its reason. An accepted record is never edited; a change is a new record that supersedes the old one, linked both ways.
+- The record is born in the feature branch with status proposed, is reviewed in the PR like code, and becomes accepted in the same PR before merge. A rejected record is merged too, with the reason for the rejection. An accepted record is never edited; a change is a new record that supersedes the old one, linked both ways.
 - The record links the MLflow experiment or run that motivated it.
 
 ## Experiments and reproducibility

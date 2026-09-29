@@ -33,7 +33,7 @@ A reminder so that nothing is forgotten; what is needed in each case, you decide
 - Ask for clearer code instead of an explanation in the thread; the explanation belongs in the code or in a decision record.
 - Resolve the threads yourself after checking the fixing commit; GitHub lets the author resolve them too, so say once that you do it.
 - In every PR that touches modelling code check: an MLflow run whose commit is on the PR branch and whose experiment is named in the description; a decision record when a library, a baseline, a metric or a dataset changed; no data, weights or secrets in the diff; CI green.
-- Once per checkpoint, run the README commands yourself from a fresh clone.
+- Before each checkpoint, run the README commands yourself from a fresh clone.
 - Do not paste the student's unpublished code into an external LLM service without their agreement.
 
 ## Assessment

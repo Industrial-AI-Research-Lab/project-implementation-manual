@@ -42,7 +42,7 @@ Ways to get the PDF:
 - the Unpaywall extension (a green tab appears when a legal free copy exists) and the "All versions" and [PDF] links in Google Scholar;
 - a preprint or accepted manuscript on arXiv or the author's page;
 - eLIBRARY.RU or CyberLeninka for Russian papers;
-- an e-mail to the corresponding author with the DOI; publishers allow sharing with colleagues on request;
+- an e-mail to the corresponding author with the DOI; publishers usually allow authors to send the paper to colleagues on request;
 - Sci-Hub, a pirate resource: its mirrors move often, so search for a current address each time, and it lacks many recent papers.
 
 Record which version you hold, preprint, accepted manuscript, or published, in the manager.

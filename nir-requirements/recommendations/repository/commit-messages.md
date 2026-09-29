@@ -14,7 +14,7 @@ Optional. A good message makes the history readable for the supervisor now and f
 
 ## Types
 
-An optional prefix from Conventional Commits, matching the branch types: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`; a `!` after the type marks a breaking change. With squash and merge the PR title becomes the commit on `main`, so the title follows the same rules.
+An optional prefix from Conventional Commits, matching the branch types: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`; a `!` after the type marks a breaking change. With squash and merge the PR title becomes the commit message on `main`, so the title follows the same rules.
 
 ## Examples
 
