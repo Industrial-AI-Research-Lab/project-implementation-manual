@@ -16,7 +16,7 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Repository secret, environment secret | Encrypted values for GitHub Actions. Repository secrets can be created by a collaborator; environment secrets only by the owner. | Credentials that CI needs go there, never into a workflow file or a PR. |
 | pre-commit hook, VCS hook, agent hook | Three mechanisms share the word: pre-commit runs checks before a commit, configured in `.pre-commit-config.yaml`; a bare VCS hook is a script in `.git/hooks`; an agent hook runs a command at a step of an LLM assistant's work. | This guide uses pre-commit and the agent hook; both run the same `make check`. |
 | Lock file (`uv.lock`) | The exact version of every dependency resolved for the project. | Commit it. CI installs from it with `uv sync --locked`, so a run tied to a commit can be re-run. |
-| Harness, LLM harness | The environment an LLM assistant works in: its instruction files, permissions, hooks and the checks they run. | The harness runs `make check` after edits, so the assistant cannot leave the repository red. A separate guide on agent artifacts covers it. |
+| Harness, LLM harness | The environment an LLM assistant works in: its instruction files, permissions, hooks and the checks they run. | The harness runs `make check` after edits, so the assistant cannot leave the repository red. The [agent artifacts guide](../agents/student.md) covers it. |
 
 ## Repository and access
 
@@ -128,7 +128,7 @@ consulted: <supervisor>
 ## Automatic checks
 
 - One target `make check` runs everything: ruff lint and format, pytest with at least one smoke test that runs the main pipeline on a tiny input in seconds.
-- Three callers, the same target: pre-commit on your machine, CI on every PR, the agent hook after the assistant edits files. Add the command to the instruction file the assistant reads.
+- Three callers, the same target: pre-commit on your machine, CI on every PR, the agent hook after the assistant edits files. Add the command to the instruction file the assistant reads; ready configs for all three are in the [agent artifacts guide](../agents/student.md#one-check-for-the-agent-pre-commit-and-ci).
 - CI on a PR adds what a machine checks better than a person: branch name and PR title against the type list, gitleaks, large files, `uv sync --locked`. Jobs that need lab credentials are optional and skipped when the secret is absent.
 - Never commit with `--no-verify`; a red check gets fixed.
 
