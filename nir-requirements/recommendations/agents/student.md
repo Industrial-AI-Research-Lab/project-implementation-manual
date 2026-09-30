@@ -64,7 +64,7 @@ The `make check` target from the [repository guide](../repository/student.md#aut
 ```json
 {
   "permissions": {
-    "deny": ["Read(./.env)", "Read(./.env.*)"]
+    "deny": ["Read(./.env)", "Read(./.env.local)"]
   },
   "hooks": {
     "Stop": [
@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v9
+      - uses: astral-sh/setup-uv@v10.2.0
       - run: uv sync --locked
       - run: make check
 ```
