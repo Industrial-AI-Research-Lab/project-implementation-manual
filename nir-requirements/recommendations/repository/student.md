@@ -36,6 +36,8 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 
 ## Layout and what never enters the repository
 
+The lab's [project template](https://github.com/Industrial-AI-Research-Lab/nir-project-template) has this layout ready, with the checks, the PR template and the issue form configured: create your repository with "Use this template", then run `make rename NAME=<package>`.
+
 ```
 README.md  .env.example  pyproject.toml  uv.lock  Makefile
 .github/          pull_request_template.md, CODEOWNERS, workflows/

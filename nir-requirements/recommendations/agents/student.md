@@ -127,6 +127,8 @@ Before finishing a task, run `make check` and make it pass. Never commit with `-
 
 Shared rules, skills and hooks are easiest to keep in one overlay repository: a rule fixed there reaches every project that connects the overlay as soon as you update the version there.
 
+The lab's starter overlay is [nir-agent-overlay](https://github.com/Industrial-AI-Research-Lab/nir-agent-overlay): shared instructions, six rules and skills for decision records, experiment issues, meeting records and PR descriptions. The [project template](https://github.com/Industrial-AI-Research-Lab/nir-project-template) connects it with `make overlay`.
+
 **Connecting.** Add the overlay to the project as a submodule, pin the version, and create a symbolic link to the rules in the folder the agent reads:
 
 ```bash

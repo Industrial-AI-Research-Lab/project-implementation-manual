@@ -36,6 +36,8 @@
 
 ## Структура и что не попадает в репозиторий
 
+В [шаблоне проекта](https://github.com/Industrial-AI-Research-Lab/nir-project-template) лаборатории такая структура уже собрана вместе с проверками, шаблоном PR и формой issue: создайте репозиторий кнопкой «Use this template» и выполните `make rename NAME=<пакет>`.
+
 ```
 README.md  .env.example  pyproject.toml  uv.lock  Makefile
 .github/          pull_request_template.md, CODEOWNERS, workflows/
