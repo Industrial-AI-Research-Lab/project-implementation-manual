@@ -2,5 +2,12 @@
 .codex/
 .claude/
 .agents/
-.agent/
+.agent
 docs/superpowers/
+
+# Navigator context markers
+.context-markers/
+
+# Local agent instructions (Navigator-generated)
+CLAUDE.md
+AGENTS.md
