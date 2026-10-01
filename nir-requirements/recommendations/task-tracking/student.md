@@ -19,11 +19,13 @@ A task board is kept where the code is and shows the supervisor how the work is 
 
 ## The board in the first week
 
-1. Copy the lab's board template: open the template in the lab organisation, click Make a copy and save the copy in your account. Fields, views and automations are copied except auto-add; cards and collaborators are not. Our lab has such a template; if you do not have one, build the board yourself from "Fields and views".
-2. Link the board to the repository in the Projects tab. The tab lists only boards of the repository owner, so the board and the repository must belong to the same account.
-3. Add the supervisor to the board members with the Admin role: Settings → Manage access. Board access and repository access are granted separately; both invitations are needed.
-4. Set the board's visibility yourself: Settings → Danger zone → Visibility. Keep boards of industrial projects and projects under NDA private; never post partner data, screenshots or logs in cards.
-5. Open Workflows and check that closing an issue and merging a PR move the card to Done. The free plan allows only one auto-add rule (Auto-add to project): turn it on for your repository.
+1. Ask your supervisor for Read access to the lab's private starter board. Open the [empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) → project menu → Make a copy. Choose the account that owns your repository and enter a project name. The board contains the fields and views listed below, with no tasks or draft issues. You can also create a board from scratch using the same settings.
+2. In your repository, open Projects → Link a project and select the copy. Creating a repository from the code template does not create a task board. The Projects tab lists boards owned by the repository owner.
+3. In the board's Settings → Manage access, invite your supervisor as Admin. Invite them separately as a repository collaborator.
+4. Set visibility in Settings → Danger zone. Keep boards for industrial projects and projects under NDA private; never post partner data, screenshots or logs in cards.
+5. In Settings → Iteration, add two-week periods for your semester and breaks for exams. The starter board has no preset dates. In Plan, choose Iteration as the date field and enable milestones in the view settings.
+6. In Workflows, enable Item closed and Pull request merged with Status set to Done. Configure Auto-add to project for your repository with `is:issue is:open`, then save and enable it. Auto-add rules and collaborators are not copied. Existing issues must be added manually through their Projects field.
+7. Create your own tasks with your supervisor and assign their iterations. Board shows only the current iteration; tasks without an iteration will not appear there. Confirm that a new issue is added automatically and appears in Board after you assign the current iteration.
 
 ## Fields and views
 

@@ -38,6 +38,8 @@
 
 В [шаблоне проекта](https://github.com/Industrial-AI-Research-Lab/nir-project-template) лаборатории такая структура уже собрана вместе с проверками, шаблоном PR и формой issue: создайте репозиторий кнопкой «Use this template» и выполните `make rename NAME=<пакет>`.
 
+Создайте доску задач отдельно: попросите руководителя предоставить доступ Read, скопируйте [приватную пустую стартовую доску](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) и выполните [шаги настройки](../task-tracking/student.ru.md#доска-в-первую-неделю). В ней есть поля и представления без заранее созданных задач.
+
 ```
 README.md  .env.example  pyproject.toml  uv.lock  Makefile
 .github/          pull_request_template.md, CODEOWNERS, workflows/

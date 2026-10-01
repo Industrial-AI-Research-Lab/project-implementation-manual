@@ -38,6 +38,8 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 
 The lab's [project template](https://github.com/Industrial-AI-Research-Lab/nir-project-template) has this layout ready, with the checks, the PR template and the issue form configured: create your repository with "Use this template", then run `make rename NAME=<package>`.
 
+Create the task board separately: ask your supervisor for Read access, copy the [private empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) and follow the [board setup steps](../task-tracking/student.md#the-board-in-the-first-week). It contains fields and views without prefilled tasks.
+
 ```
 README.md  .env.example  pyproject.toml  uv.lock  Makefile
 .github/          pull_request_template.md, CODEOWNERS, workflows/
