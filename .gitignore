@@ -4,3 +4,4 @@
 .agents/
 .agent/
 docs/superpowers/
+.env

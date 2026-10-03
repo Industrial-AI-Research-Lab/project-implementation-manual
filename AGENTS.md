@@ -4,7 +4,7 @@
 
 This repository is a working collection of materials, requirements, recommendations, templates, and methodological guidance for student projects. It is not currently an official instruction or regulatory document. Formal decisions must be checked against the current rules of the responsible academic program and confirmed with the appropriate supervisor or coordinator.
 
-The current iteration contains only NIR project descriptions, requirements, assessment guidance, and LLM-assistant context under `nir-requirements/`.
+The current iteration contains NIR project descriptions, requirements, assessment guidance, and LLM-assistant context under `nir-requirements/`, and a research-methodology template set under `research-templates/`.
 
 ## Repository Structure
 
@@ -14,6 +14,8 @@ The current iteration contains only NIR project descriptions, requirements, asse
 - `nir-requirements/assessment/` — grading principles, rubrics, matrices, and defense checklists.
 - `nir-requirements/project-types/` — student and supervisor guidance for scientific, technological, industrial, and collaborative projects.
 - `nir-requirements/llm-assistant/` — reusable context for an LLM assisting with NIR projects.
+- `research-templates/` — research templates for planning, conducting, documenting, and reviewing a study, with a glossary at the end of each page.
+- `research-templates/agent-guide.md` — instructions for an LLM agent on how to use the research templates when helping a researcher. Read it before using or editing the templates; the Russian edition is `research-templates/agent-guide.ru.md`.
 - Future materials may add top-level sections for recommendations, templates, and methodological manuals. Do not create empty placeholder sections unless the user requests them.
 
 ## Naming Conventions
@@ -36,7 +38,7 @@ The current iteration contains only NIR project descriptions, requirements, asse
 
 ## README and Navigation SOP
 
-1. Every directory under `nir-requirements/` must contain `README.md` and `README.ru.md`.
+1. Every directory under `nir-requirements/` and `research-templates/` must contain `README.md` and `README.ru.md`.
 2. Each README briefly summarizes its section and links every immediate child document or subsection.
 3. English README files link only to English content and English child README files. Russian README files link only to Russian content and Russian child README files.
 4. The root README pair links to each other as the language switch.
@@ -53,6 +55,12 @@ The current iteration contains only NIR project descriptions, requirements, asse
 - Do not restore attribution to the removed dated source. State retained requirements directly and neutrally.
 - Keep the established project-type terms consistent across the repository: scientific, technological, industrial, and collaborative project.
 
+## Research Templates SOP
+
+- Link template pages to each other with relative links to the matching language edition.
+- When a page gains a non-obvious term, abbreviation, or framework name, add its explanation to the `Glossary` section of both language editions, using the same wording as other pages that define the term.
+- Follow [research-templates/agent-guide.md](research-templates/agent-guide.md) when using the templates to help a researcher.
+
 ## Git and Change-Control SOP
 
 - Never create a Git commit unless the user explicitly approves committing the current changes.
@@ -66,7 +74,7 @@ The current iteration contains only NIR project descriptions, requirements, asse
 Before reporting a content change as complete:
 
 1. Confirm every content file has its language counterpart.
-2. Confirm every `nir-requirements/` directory has both README editions.
+2. Confirm every `nir-requirements/` and `research-templates/` directory has both README editions.
 3. Resolve all relative Markdown links.
 4. Confirm English indexes do not link to Russian content and Russian indexes do not link to English content.
 5. Compare the structure and meaning of every modified language pair.
