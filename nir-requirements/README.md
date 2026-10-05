@@ -1,6 +1,6 @@
 # NIR Requirements
 
-This section contains shared requirements, assessment guidance, project-type-specific expectations, and reusable context for an LLM assistant supporting NIR projects.
+This section contains shared requirements, assessment guidance, project-type-specific expectations, practical recommendations, and reusable context for an LLM assistant supporting NIR projects.
 
 ## Authoritative sources
 
@@ -15,3 +15,4 @@ When these sources conflict with the repository's Markdown materials, the source
 - [Assessment](assessment/README.md) — grading levels, formal caps, matrices, and defense checklists.
 - [Project types](project-types/README.md) — student and supervisor guidance for the four supported project types.
 - [LLM assistant](llm-assistant/README.md) — project context for assisting with topic formulation and review.
+- [Recommendations](recommendations/README.md) — practical guides for running a project: scientific papers, repository and code work, task tracking, agent artifacts.
