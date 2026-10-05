@@ -19,7 +19,7 @@ A task board is kept where the code is and shows the supervisor how the work is 
 
 ## The board in the first week
 
-1. Ask your supervisor for Read access to the lab's private starter board. Open the [empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) → project menu → Make a copy. Choose the account that owns your repository and enter a project name. The board contains the fields and views listed below, with no tasks or draft issues. You can also create a board from scratch using the same settings.
+1. Create a GitHub Project with the fields and views listed below. If your supervisor has a starter board, ask whether you can copy it: open the board → project menu → Make a copy, choose the repository owner’s account and enter a name. Lab example: the [private empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3). Access to an organisation project requires membership or outside-collaborator access to one of its repositories; a Read invitation alone is not enough. If access is unavailable, create the board from scratch with the same settings.
 2. In your repository, open Projects → Link a project and select the copy. Creating a repository from the code template does not create a task board. The Projects tab lists boards owned by the repository owner.
 3. In the board's Settings → Manage access, invite your supervisor as Admin. Invite them separately as a repository collaborator.
 4. Set visibility in Settings → Danger zone. Keep boards for industrial projects and projects under NDA private; never post partner data, screenshots or logs in cards.
@@ -55,6 +55,8 @@ Views:
 
 ## Experiments as issues
 
+Use the [experimental protocol](../../../research-templates/experiment.md) to state the hypothesis, comparison and success criterion before the run.
+
 - Open a parent issue for each checkpoint and nest sub-issues in it: one experiment, one issue.
 - Open experiments from the form `.github/ISSUE_TEMPLATE/experiment.yml`. Turn off creating blank issues with `blank_issues_enabled: false` in `.github/ISSUE_TEMPLATE/config.yml`. GitHub enforces required form fields only in public repositories.
 
@@ -88,7 +90,7 @@ body:
 
 - Put the issue number in the PR description (`Closes #N`) and in the MLflow run note, so that result, code and discussion will be connected.
 - Close a negative result as completed and describe in the issue the outcome and what it means for the work. Close as not planned only work dropped before any result.
-- If a result breaks the rest of the plan, ask the LLM assistant to draft an ADR with the new plan, discuss it with the supervisor, and update cards and milestones.
+- If a result breaks the rest of the plan, draft an ADR with the new plan, discuss it with the supervisor, and update cards and milestones. If you use an LLM assistant in the project, have it draft the ADR and review it; otherwise write it manually.
 
 ## Semester plan
 
@@ -105,11 +107,11 @@ body:
 - the plan for the next iteration: items whose completion can be checked;
 - what you need from the supervisor: a decision, advice or feedback.
 
-**Meetings.** For example, in our lab meetings take place in Talk (itmo.ktalk.ru). Remember to start the recording when the meeting begins; better, schedule the meeting in advance and turn on auto-record while scheduling, so the recording starts by itself. Tell the participants that the meeting is recorded. After the meeting Talk produces a transcript with speaker names and time codes and a meeting summary; they appear under "Artefacts → Video recordings → Overview".
+**Meetings.** For example, in our lab meetings take place in Talk (itmo.ktalk.ru). Start recording at the beginning, or enable auto-record when scheduling the meeting. Tell the participants that the meeting is recorded. For a cloud recording, Talk can produce a transcript with speakers and time codes and a summary under “Artefacts → Recordings → Overview”, if the plan and space settings allow it. Transcripts are unavailable on Start and Server; summaries are unavailable on Start. The AI protocol can extract decisions and actions with owners and deadlines on Business Plus and Unlimited; it does not transfer them into GitHub. Check availability in the [transcript help](https://support.kontur.ru/talk/80168-transkripciya_zapisi_vstrechi) and [protocol announcement](https://kontur.ru/talk/spravka/80987-tolk_nauchilsya_gotovit_protokol_vstrechi) (checked 5 October 2026).
 
-1. Ask the LLM assistant to write `docs/meetings/YYYY-MM-DD.md` from the summary: participants by role, a link to the recording, decisions with time codes, actions with owner, issue link and date, open questions, the next meeting date.
+1. Prepare `docs/meetings/YYYY-MM-DD.md` from the summary or protocol: participants by role, a link to the recording, decisions with time codes, actions with owner, issue link and date, open questions, the next meeting date. If you use an LLM assistant, have it draft the file and review it; otherwise write it manually. Before passing a summary, protocol or transcript to an assistant, follow the [sanitization rules](meeting-records.md#sanitization): process uncleansed text only with a local model or a service that stores data in Russia; remove personal and confidential data before using a foreign service.
 2. Check decisions, numbers and names against the transcript: clicking a line makes Talk play that fragment. A neural network writes the summary, and it makes mistakes.
-3. Talk creates neither ADRs nor tasks; that is your job: ask the assistant to draft an ADR from the meeting file (see the [repository guide](../repository/student.md#decisions)) and to turn the meeting's actions into issues and add them to the board with `gh`. Once, allow `gh` to work with boards: `gh auth refresh -s project`.
+3. Create ADRs from the confirmed decisions (see the [repository guide](../repository/student.md#decisions)), turn agreed actions into issues and add them to the board. If you use an assistant, ask it to draft these artifacts and check them before creation; otherwise create them yourself. With `gh`, allow access to boards once: `gh auth refresh -s project`.
 
    ```bash
    gh issue create --title "..." --body "..." --project "<board title>"

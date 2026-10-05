@@ -33,7 +33,7 @@ Next meeting: YYYY-MM-DD
 
 ## Transcript
 
-Talk's built-in transcript is usually enough, but it recognises Russian speech only. For a meeting in English, and also if you do not trust the transcript or recorded the meeting with another tool, pick an option from the table.
+Talk's built-in transcript recognises Russian speech only, according to the [help page](https://support.kontur.ru/talk/80168-transkripciya_zapisi_vstrechi), checked manually on 5 October 2026. It requires a cloud recording and enabled transcription in the space settings; Start and Server do not support it. For a meeting in English, an unreliable transcript or a recording from another tool, pick an option from the table.
 
 | Tool | Where it runs | Speakers | What you need |
 |---|---|---|---|
@@ -63,7 +63,7 @@ segments, info = model.transcribe(
     vad_filter=True,
     initial_prompt="MLflow, baseline, ablation, <terms and names of your project>",
 )
-with open("meeting.txt", "w") as f:
+with open("meeting.txt", "w", encoding="utf-8") as f:
     for s in segments:
         f.write(f"[{int(s.start // 60):02d}:{int(s.start % 60):02d}] {s.text.strip()}\n")
 ```
@@ -129,7 +129,7 @@ If an owner or a due date is not named, write "not stated". If you are unsure wh
 List as JSON the actions agreed at the meeting, with the fields title, owner, deadline, timecode. Take only actions both sides agreed to.
 ```
 
-Then ask the assistant to open each action from the list with `gh issue create --project`.
+Check the actions against the recording, then create each agreed action with `gh issue create --project` yourself or ask your assistant to do it.
 
 **Checking the record.**
 

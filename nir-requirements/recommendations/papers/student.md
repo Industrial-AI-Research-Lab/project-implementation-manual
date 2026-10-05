@@ -96,6 +96,8 @@ Prompt templates:
 - Questions: "Using only the attached paper, answer: what is the baseline, how was it compared, and what would break the method in my setting: <your setting>. Cite the section for each answer."
 - Candidates: "List papers on <topic> from <year> onward with title, authors, venue, and DOI. Mark any item you are not certain exists."
 
+Use the [literature review template](../../../research-templates/literature-review.md) to turn your reading notes into a comparison of related work and a justified research gap.
+
 ## Minimum expected result
 
 By the agreed checkpoint, show the supervisor:

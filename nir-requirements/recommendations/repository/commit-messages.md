@@ -6,9 +6,9 @@ Optional. A good message makes the history readable for the supervisor now and f
 
 1. Separate the subject from the body with a blank line.
 2. Keep the subject to about 50 characters.
-3. Capitalize the subject.
+3. Capitalize a plain subject; after a Conventional Commits type prefix, use lowercase as in the examples.
 4. No period at the end of the subject.
-5. Imperative mood: the subject completes the sentence "If applied, this commit will ...".
+5. Use the imperative mood. For a subject in English, check that it completes “If applied, this commit will ...”. This does not require writing in English.
 6. Wrap the body at 72 characters.
 7. The body explains what and why; the diff shows how.
 

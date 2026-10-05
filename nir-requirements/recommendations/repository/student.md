@@ -16,13 +16,13 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Repository secret, environment secret | Encrypted values for GitHub Actions. Repository secrets can be created by a collaborator; environment secrets only by the owner. | Credentials that CI needs go there, never into a workflow file or a PR. |
 | pre-commit hook, VCS hook, agent hook | Three mechanisms share the word: pre-commit runs checks before a commit, configured in `.pre-commit-config.yaml`; a bare VCS hook is a script in `.git/hooks`; an agent hook runs a command at a step of an LLM assistant's work. | This guide uses pre-commit and the agent hook; both run the same `make check`. |
 | Lock file (`uv.lock`) | The exact version of every dependency resolved for the project. | Commit it. CI installs from it with `uv sync --locked`, so a run tied to a commit can be re-run. |
-| Harness, LLM harness | The environment an LLM assistant works in: its instruction files, permissions, hooks and the checks they run. | The harness runs `make check` after edits, so the assistant cannot leave the repository red. The [agent artifacts guide](../agents/student.md) covers it. |
+| Harness, LLM harness | The environment an LLM assistant works in: its instruction files, permissions, hooks and the checks they run. | Configure the harness to run `make check` after edits; review failed checks before committing. The [agent artifacts guide](../agents/student.md) covers it. |
 
 ## Repository and access
 
 - The repository lives in your personal account. Transfer it to the lab organisation only when the code is needed in a lab project.
 - The supervisor is a collaborator with write access and an Admin of your GitHub Project. A personal repository has no other roles, so the owner-only actions stay with you and you do them on request: visibility, rulesets, merging CODEOWNERS and the PR template, environment secrets, transfer.
-- Visibility is your choice. Recommended: public, unless the data or intellectual property forbids it. Visibility decides what the platform can enforce:
+- For scientific and technological projects, a public repository is a mandatory result by the end of the semester (see the [scientific](../../project-types/scientific/student.md#required-and-expected-artifacts) and [technological](../../project-types/technological/student.md#artifacts) requirements). A missing mandatory artifact caps the grade at **4B**. During development, the main repository may remain private and separate private repositories may be used. Never publish confidential data or material under NDA; agree the publishable artifact with the supervisor. Visibility and the plan decide what the platform can enforce:
 
 | Enforced by the platform | Public, Free | Private, Free |
 |---|---|---|
@@ -31,14 +31,14 @@ This guide sets up a repository the supervisor can run from a fresh clone, pull 
 | Secret scanning and push protection | yes | no |
 | Draft PRs, Actions minutes | yes | yes, 2 000 minutes a month |
 
-- On a private repository the same rules hold by agreement; CI is the only automatic gate there.
+- On a private repository on Free, the same rules hold by agreement; CI reports check results, but does not itself prevent merging. Verified students can get GitHub Pro for free through the [Student Developer Pack](https://education.github.com/pack/); Pro supports rulesets and CODEOWNERS in private repositories too. Apply with [proof of current enrolment](https://docs.github.com/en/education/about-github-education/github-education-for-students/apply-to-github-education-as-a-student). If needed, ask the university for an enrolment letter in English; check which office issues it. An international office is one possible route, not a GitHub requirement.
 - Keep a full local clone and a second remote, an institutional GitLab or another forge: access to the platform can be intermittent, and the supervisor runs exactly a fresh clone.
 
 ## Layout and what never enters the repository
 
 The lab's [project template](https://github.com/Industrial-AI-Research-Lab/nir-project-template) has this layout ready, with the checks, the PR template and the issue form configured: create your repository with "Use this template", then run `make rename NAME=<package>`.
 
-Create the task board separately: ask your supervisor for Read access, copy the [private empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) and follow the [board setup steps](../task-tracking/student.md#the-board-in-the-first-week). It contains fields and views without prefilled tasks.
+Create the task board separately using the [board setup steps](../task-tracking/student.md#the-board-in-the-first-week). If your supervisor has a starter board, ask whether you can copy it. Lab example: the [private empty starter board](https://github.com/orgs/Industrial-AI-Research-Lab/projects/3) has fields and views without prefilled tasks. Access to an organisation project requires membership or outside-collaborator access to one of its repositories; otherwise create a board from scratch with the same settings.
 
 ```
 README.md  .env.example  pyproject.toml  uv.lock  Makefile
@@ -76,9 +76,9 @@ PR fields:
 
 - title in the branch style: `feat: short description`;
 - **Plan**: three to five lines written by hand when you open the PR, what you intend to do;
-- **Done**: before removing Draft, have an LLM assistant generate a concise description of the work from the diff; the Plan and the `Closes #N` line stay untouched;
+- **Done**: before removing Draft, describe the work from the diff. If you use an LLM assistant in the project, have it draft the description and review it yourself; otherwise write it manually. The Plan and the `Closes #N` line stay untouched;
 - **How to reproduce**: what the reviewer runs to see the result: the command with its config, where the data comes from, the MLflow run with the numbers;
-- assignee: you; reviewer: the supervisor; in a public repository CODEOWNERS requests them when Draft is removed, in a private one you request them yourself;
+- assignee: you; reviewer: the supervisor; in a public repository or a private one on Pro, CODEOWNERS requests them when Draft is removed; in a private repository on Free you request them yourself;
 - label `enhancement` for new functionality;
 - Draft until the work is ready. A draft cannot be merged and requests no review.
 
@@ -114,14 +114,16 @@ consulted: <supervisor>
 ## Pros and cons of the options    <- required when an option the supervisor suggested is rejected
 ```
 
-- The record is written by your LLM assistant, never by hand: at the moment of the decision, ask the assistant to draft it from the discussion, the PR thread and the code, then review it as you review code.
+- At the moment of the decision, write a record from the discussion, the PR thread and the code. If you use an LLM assistant in the project, have it draft the record and review it as you review code; otherwise write it manually.
 - What deserves a record: repository structure and data flow; a library, framework or tool such as the tracker, the storage or the LLM gateway; an interface or data contract; the baseline, the primary metric, the dataset and its split; a direction closed by a negative result. A single hyperparameter run is an MLflow run and needs no record.
 - The record is born in the feature branch with status proposed, is reviewed in the PR like code, and becomes accepted in the same PR before merge. A rejected record is merged too, with the reason for the rejection. An accepted record is never edited; a change is a new record that supersedes the old one, linked both ways.
 - The record links the MLflow experiment or run that motivated it.
 
 ## Experiments and reproducibility
 
-- Every experiment is recorded in MLflow. Default: a local database, `MLFLOW_TRACKING_URI=sqlite:///mlflow.db` in `.env`, with `mlruns/` and `mlartifacts/` ignored. If `mlflow.db` is committed so that the supervisor can open it with `mlflow ui --backend-store-uri sqlite:///mlflow.db`: one author only, `mlflow gc` before the commit, the file under 50 MB, committed on the PR branch that produced the runs, a merge conflict resolved by keeping one side and re-running. MLflow documentation does not describe this practice.
+Use the [experimental protocol](../../../research-templates/experiment.md) to plan a run and the [reproducibility template](../../../research-templates/reproducibility.md) to prepare its code, data and instructions for verification.
+
+- Every experiment is recorded in MLflow. Default: a local database, `MLFLOW_TRACKING_URI=sqlite:///mlflow.db` in `.env`, with `mlruns/` and `mlartifacts/` ignored. Committing `mlflow.db` is a lab-specific option agreed with the supervisor, not a practice described by MLflow documentation. It lets the supervisor open the database with `mlflow ui --backend-store-uri sqlite:///mlflow.db`: one author only, `mlflow gc` for runs marked deleted before the commit, the file under 50 MB, committed on the PR branch that produced the runs. `mlflow gc` does not compact the SQLite database; check the actual file size separately. Resolve a merge conflict by keeping one side and re-running the experiments.
 - In the first week ask the supervisor whether the lab has a shared tracking server. If it does, switch the client to it: `MLFLOW_TRACKING_URI=https://<server>`, `MLFLOW_EXPERIMENT_NAME`, and for an S3-compatible artifact store `MLFLOW_S3_ENDPOINT_URL`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` in `.env`; `.env.example` lists them empty. Lab example: the server and MinIO on the cluster.
 - Naming: experiment `<repository>` or `<repository>/<task>`; run name `<branch>-<short-description>`; always call `mlflow.set_experiment`.
 - Mandatory tags, agreed with the supervisor once: `stage` (baseline, ablation, final), `dataset`, `model_family`, `pr` (number). One paragraph in the run notes.
@@ -131,7 +133,7 @@ consulted: <supervisor>
 
 ## Automatic checks
 
-- One target `make check` runs everything: ruff lint and format, pytest with at least one smoke test that runs the main pipeline on a tiny input in seconds.
+- One target `make check` runs everything: ruff lint and format checks, mypy type checks, and pytest with at least one smoke test that runs the main pipeline on a tiny input in seconds. This matches `check: lint types test` in the lab template.
 - Three callers, the same target: pre-commit on your machine, CI on every PR, the agent hook after the assistant edits files. Add the command to the instruction file the assistant reads; ready configs for all three are in the [agent artifacts guide](../agents/student.md#one-check-for-the-agent-pre-commit-and-ci).
 - CI on a PR adds what a machine checks better than a person: branch name and PR title against the type list, gitleaks, large files, `uv sync --locked`. Jobs that need lab credentials are optional and skipped when the secret is absent.
 - Never commit with `--no-verify`; a red check gets fixed.

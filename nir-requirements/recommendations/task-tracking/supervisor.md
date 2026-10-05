@@ -16,7 +16,7 @@ What this gives you: the student board shows in five minutes how the work is goi
 
 This is a reminder list; decide yourself what a particular student needs from it:
 
-- store a board template in the lab organisation: the fields Status, Iteration, Kind, Step, Target date and three views. The student copies it with Make a copy; auto-add, cards and collaborators are not copied;
+- if you maintain a starter board, check that the student has access before asking them to copy it with Make a copy; otherwise help them create a board from scratch. Use Status, Iteration, Kind, Step, Target date and three views from the student guide. Auto-add and collaborators are not copied;
 - accept the invitation to the student's board with the Admin role;
 - discuss with the student how often they report on the board (at least once per iteration) and agree on meeting times; schedule meetings in Talk with auto-record;
 - agree where the student will duplicate the report link so that you do not miss it even if you have not opened the board for a while: Telegram or e-mail;

@@ -1,15 +1,15 @@
 # Agent Artifacts — Student Guide
 
-An agent works more precisely when the project's rules live in files it reads by itself and the checks run without you. This guide describes what to put in the repository, how to move shared rules into an overlay repository, and how to connect the agent with CI.
+An agent works more precisely when project rules live in files it reads and checks run automatically. This guide covers shared instruction files, checks, overlays and disclosure for any LLM assistant. Product-specific settings are labelled as examples; they do not require choosing that product. Apply this guide if you use an agent in the project.
 
 ## Terms
 
 | Term | Meaning | What it means for you |
 |---|---|---|
 | Agent, harness | An agent is an LLM assistant that reads files, runs commands and edits code by itself. The harness is the environment it works in: instruction files, permissions, hooks and checks. | The more rules the harness holds, the less often you repeat them in requests. |
-| Instruction file | A file the agent reads at start-up: AGENTS.md, CLAUDE.md, `.github/copilot-instructions.md`. | The main file is AGENTS.md: almost every agent reads it. |
+| Instruction file | A file the agent reads at start-up, such as AGENTS.md or a tool-specific instruction file. | Keep shared instructions in AGENTS.md and check how your agent loads it. |
 | Rule, skill | A rule is a short instruction in a separate file, for example about code style or working with data. A skill is a set of instructions for a typical task that the agent loads when the task fits. | Rules and skills are the natural things to move into an overlay and reuse across projects. |
-| Agent hook | A command the agent runs by itself at a given step of its work, for example before it finishes a reply. | A hook always fires; a request in text the agent may skip. |
+| Agent hook | A command the agent runs at a configured step, for example before it finishes a reply. | Hook availability and behaviour depend on the agent; keep pre-commit and CI checks too. |
 | Overlay repository | A separate repository with the agent's rules, skills, hooks and settings, connected to a project. The term has no established meaning; in this guide it means exactly this. | Your agent know-how lives in one place and connects to any project. |
 | Submodule, pinning a version | A submodule is a repository nested in another one at a specific commit. Pinning a version means naming a tag or a commit instead of a branch. | The project does not change by itself when the overlay changes: you connect a new version explicitly. |
 | Workspace trust | The question an agent asks when it first opens a folder: whether you trust its contents. | Hooks from committed settings run with your permissions; agree only after reading them. |
@@ -20,9 +20,9 @@ An agent works more precisely when the project's rules live in files it reads by
 ## Instruction files
 
 - AGENTS.md at the repository root is the main file. List in it the install and run commands, the check command `make check`, the branch and PR conventions (see the [repository guide](../repository/student.md#pull-request)), and the rule "never commit with `--no-verify`". Keep it short, under 200 lines; leave out what the code already shows.
-- If you work in Claude Code, create CLAUDE.md with `@AGENTS.md` as its first line and add below it only what concerns Claude Code. Without that line Claude Code does not read AGENTS.md when a CLAUDE.md is present.
+- Tool example — Claude Code: if you use it, create CLAUDE.md with `@AGENTS.md` as its first line and add below it only what concerns Claude Code. Without that line Claude Code does not read AGENTS.md when a CLAUDE.md is present.
 
-Which files the agents read, as of September 2026:
+Examples of instruction files by tool (check the linked documentation when configuring your agent):
 
 | Agent | Instruction files |
 |---|---|
@@ -31,24 +31,24 @@ Which files the agents read, as of September 2026:
 | Cursor | AGENTS.md, `.cursor/rules/` |
 | GitHub Copilot | AGENTS.md, CLAUDE.md, `.github/copilot-instructions.md` |
 
-Each agent has its own settings for hooks; the examples below are for Claude Code.
+Choose the instruction file your agent supports and confirm that it loads the project rules. Each tool has its own hook settings; the example below uses Claude Code. The shared `make check`, pre-commit and CI setup applies to other agents too.
 
 ## What to commit
 
 Put shared files into the project repository or the overlay:
 
-- AGENTS.md and CLAUDE.md;
-- rules and skills: `.claude/rules/`, `.claude/skills/`;
-- the agent's shared settings with hooks and denials: `.claude/settings.json`;
-- service folders where tools keep the work plan, for example `.agent/`.
+- AGENTS.md and any tool-specific file needed to load it;
+- rules and skills in the directories your agent supports;
+- shared settings and hook scripts, reviewed by the team;
+- plans that the team maintains together; keep personal tool state local.
+
+Claude Code example: CLAUDE.md, `.claude/rules/`, `.claude/skills/`, `.claude/settings.json` and `.claude/check-stop.sh`.
 
 Add personal files to `.gitignore`:
 
 ```gitignore
 # personal agent settings
 *.local.*
-CLAUDE.local.md
-.claude/settings.local.json
 ```
 
 A personal CLAUDE.local.md on its own switches AGENTS.md off for Claude Code. When the project has no CLAUDE.md, put the line `@AGENTS.md` into CLAUDE.local.md.
@@ -59,7 +59,7 @@ Before committing, check that the shared files contain no tokens and no absolute
 
 The `make check` target from the [repository guide](../repository/student.md#automatic-checks) runs from three places: the agent hook, pre-commit and CI. The agent's edits, your commits and your PRs pass the same checks.
 
-**Agent settings**, `.claude/settings.json`:
+**Agent settings — Claude Code example**, `.claude/settings.json`:
 
 ```json
 {
@@ -70,7 +70,7 @@ The `make check` target from the [repository guide](../repository/student.md#aut
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "make check >&2 || exit 2" }
+          { "type": "command", "command": "bash .claude/check-stop.sh" }
         ]
       }
     ]
@@ -78,13 +78,25 @@ The `make check` target from the [repository guide](../repository/student.md#aut
 }
 ```
 
-The Stop hook runs the check before the agent finishes its reply. If the check fails, exit code 2 keeps the agent from stopping, and the agent receives the check output as the reason to continue and fixes what it broke. If it cannot fix it, the agent keeps trying; interrupt it and sort the problem out yourself.
+In this example, Stop runs before the agent finishes its reply. Exit code 2 asks it to continue with the check output. The input field `stop_hook_active` is true when the turn already continued because of a Stop hook; the script below runs the checks again but does not block a second time. If checks still fail, the hook shows a warning to the student, who must resolve the failure. The tool defaults to a cap of eight consecutive continuations; the count resets after a tool call, so it is not a bound on all attempts in the turn (see the [Stop input reference](https://code.claude.com/docs/en/hooks#stop-input), checked 5 October 2026). A hook cannot guarantee passing checks; CI remains the final check.
 
-A full `make check` after every reply gets slow once the tests take minutes. Two cheaper layouts: keep only the fast targets, formatting and lint, in the Stop hook and leave the tests to pre-commit and CI; or lint the edited file from a `PostToolUse` hook with the matcher `Edit|Write` and keep the full check for Stop. Either way, skip the check when the working tree is clean:
+Save the following script as `.claude/check-stop.sh`. It requires Bash and `jq` and skips a clean working tree:
 
-```json
-{ "type": "command", "command": "[ -z \"$(git status --porcelain)\" ] || make check >&2 || exit 2" }
+```bash
+#!/usr/bin/env bash
+input=$(cat)
+[ -z "$(git status --porcelain)" ] && exit 0
+if make check >&2; then
+    exit 0
+fi
+if [ "$(printf '%s' "$input" | jq -r '.stop_hook_active // false')" = true ]; then
+    printf '%s\n' '{"systemMessage":"Checks still fail after continuation; review the check output before committing."}'
+    exit 0
+fi
+exit 2
 ```
+
+A full `make check` after every reply gets slow once the tests take minutes. Two cheaper layouts: keep only the fast targets, formatting and lint, in the Stop hook and leave the tests to pre-commit and CI; or lint the edited file from a `PostToolUse` hook with the matcher `Edit|Write` and keep the full check for Stop. Keep the clean-tree guard and continuation handling from the script in either layout.
 
 **Pre-commit**, `.pre-commit-config.yaml`:
 
@@ -129,15 +141,15 @@ Shared rules, skills and hooks are easiest to keep in one overlay repository: a 
 
 The lab's starter overlay is [nir-agent-overlay](https://github.com/Industrial-AI-Research-Lab/nir-agent-overlay): shared instructions, six rules and skills for decision records, experiment issues, meeting records and PR descriptions. The [project template](https://github.com/Industrial-AI-Research-Lab/nir-project-template) connects it with `make overlay`.
 
-**Connecting.** Add the overlay to the project as a submodule, pin the version, and create a symbolic link to the rules in the folder the agent reads:
+**Connecting — Claude Code example.** Adapt the instruction import and rules directory to your agent. Add the overlay to the project as a submodule, pin the version, and create a symbolic link to the rules in the folder the agent reads:
 
 ```bash
-git submodule add https://github.com/<group>/<overlay>.git .agents/overlay
-git -C .agents/overlay checkout v0.3.0
+git submodule add https://github.com/Industrial-AI-Research-Lab/nir-agent-overlay.git .agents/overlay
+git -C .agents/overlay checkout v0.1.0
 mkdir -p .claude/rules
 ln -s ../../.agents/overlay/rules .claude/rules/overlay
 git add .gitmodules .agents/overlay .claude/rules/overlay
-git commit -m "chore: connect agent overlay v0.3.0"
+git commit -m "chore: connect agent overlay v0.1.0"
 ```
 
 - Import the overlay's shared instructions into CLAUDE.md with the line `@.agents/overlay/AGENTS.md`.
@@ -165,7 +177,7 @@ Add a section "LLM assistants" to the project README: which agents you use and f
 
 By the checkpoint, show the supervisor:
 
-1. AGENTS.md at the root with the `make check` command; if there is a CLAUDE.md, it imports AGENTS.md.
+1. AGENTS.md at the root with the `make check` command, loaded by your agent; any tool-specific instruction file imports or repeats these shared rules.
 2. The shared agent artifacts in the repository, the personal ones in `.gitignore`.
 3. A `make check` that runs from the agent hook, pre-commit and CI.
 4. An "LLM assistants" section in the README.
